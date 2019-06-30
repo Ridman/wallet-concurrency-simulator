@@ -1,0 +1,5 @@
+rootProject.name = 'wallet-concurrency-simulator'
+include 'simulator-server'
+include 'simulator-client'
+include 'simulator-commons'
+

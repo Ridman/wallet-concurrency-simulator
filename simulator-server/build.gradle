@@ -1,0 +1,27 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+group 'ru.undefined'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':simulator-commons')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootJar {
+    mainClassName = 'ru.undefined.simulator.server.Application'
+    classifier  = 'standalone'
+}
