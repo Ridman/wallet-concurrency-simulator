@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  simulator-server:
+    build:
+      context: simulator-server
+      dockerfile: Dockerfile
+    network_mode: host
+    restart: always
+    depends_on:
+      - mysql
+
+  mysql:
+    image: "mysql"
+    restart: always
+    network_mode: host
+    environment:
+      MYSQL_DATABASE: wallet
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev6914
+    volumes:
+      - "${CONTAINERS_DATA_DIR}/mysql:/var/lib/mysql"

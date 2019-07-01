@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "User")
+@Table(name = "UserAccount")
 @Getter @Setter
 public class UserAccount extends AbstractEntity {
 

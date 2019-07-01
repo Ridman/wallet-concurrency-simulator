@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet author="mvinokurov" id="1.0">
+        <preConditions>
+            <not>
+                <tableExists tableName="User"/>
+            </not>
+        </preConditions>
+        <createTable tableName="User">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_pk" nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropPrimaryKey tableName="User" constraintName="user_pk"/>
+            <dropTable tableName="User"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="mvinokurov" id="1.1">
+        <preConditions>
+            <not>
+                <tableExists tableName="UserAccount"/>
+            </not>
+        </preConditions>
+        <createTable tableName="UserAccount">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="useraccount_pk" nullable="false"/>
+            </column>
+            <column name="amount" type="currency" defaultValue="0"/>
+            <column name="currency" type="char(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="bigint">
+                <constraints foreignKeyName="useraccount_user_fk" references="user(id)" nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="UserAccount" constraintName="useraccount_user_fk"/>
+            <dropPrimaryKey tableName="UserAccount" constraintName="useraccount_pk"/>
+            <dropTable tableName="UserAccount"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="mvinokurov" id="1.2">
+        <preConditions>
+            <not>
+                <tableExists tableName="UserOperation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="UserOperation">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="useroperation_pk" nullable="false"/>
+            </column>
+            <column name="amount" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userAccountId" type="bigint">
+                <constraints nullable="false" foreignKeyName="useroperation_useraccount_fk"
+                             references="UserAccount(id)"/>
+            </column>
+            <column name="operationType" type="char(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="UserOperation" constraintName="useroperation_useraccount_fk"/>
+            <dropPrimaryKey tableName="UserOperation" constraintName="useroperation_pk"/>
+            <dropTable tableName="UserOperation"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
