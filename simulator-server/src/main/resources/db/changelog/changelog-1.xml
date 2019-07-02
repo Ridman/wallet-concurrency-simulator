@@ -37,7 +37,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="userId" type="bigint">
-                <constraints foreignKeyName="useraccount_user_fk" references="user(id)" nullable="false"/>
+                <constraints foreignKeyName="useraccount_user_fk" references="User(id)" nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -75,6 +75,20 @@
             <dropForeignKeyConstraint baseTableName="UserOperation" constraintName="useroperation_useraccount_fk"/>
             <dropPrimaryKey tableName="UserOperation" constraintName="useroperation_pk"/>
             <dropTable tableName="UserOperation"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="mvinokurov" id="1.3">
+        <preConditions>
+            <not>
+                <columnExists tableName="UserOperation" columnName="error"/>
+            </not>
+        </preConditions>
+        <createTable tableName="UserOperation">
+            <column name="error" type="nvarchar(255)"/>
+        </createTable>
+        <rollback>
+            <dropColumn tableName="UserOperation" columnName="error"/>
         </rollback>
     </changeSet>
 
