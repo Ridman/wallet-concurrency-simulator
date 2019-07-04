@@ -3,10 +3,7 @@ package ru.undefined.simulator.commons.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -14,10 +11,14 @@ import java.math.BigDecimal;
 @Getter @Setter
 public class UserAccount extends AbstractEntity {
 
-    private BigDecimal amount;
+    @Column(name = "amount")
+    private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
     private Long userId;
+
+    @Version
+    private Integer version;
 }

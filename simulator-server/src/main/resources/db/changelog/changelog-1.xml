@@ -92,4 +92,31 @@
         </rollback>
     </changeSet>
 
+    <changeSet author="mvinokurov" id="1.4">
+        <preConditions>
+            <not>
+                <columnExists tableName="UserAccount" columnName="version"/>
+            </not>
+        </preConditions>
+        <createTable tableName="UserAccount">
+            <column name="version" type="int" defaultValue="0"/>
+        </createTable>
+        <rollback>
+            <dropColumn tableName="UserAccount" columnName="version"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="mvinokurov" id="1.5">
+        <preConditions>
+            <not>
+                <columnExists tableName="UserOperation" columnName="updatedBalance"/>
+            </not>
+        </preConditions>
+        <createTable tableName="UserOperation">
+            <column name="updatedBalance" type="currency"/>
+        </createTable>
+        <rollback>
+            <dropColumn tableName="UserOperation" columnName="updatedBalance"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

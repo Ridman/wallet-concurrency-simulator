@@ -20,16 +20,17 @@ public class UserOperation {
 
     private BigDecimal amount;
 
+    private BigDecimal updatedBalance;
+
     private UserOperationType operationType;
 
     private OffsetDateTime date;
 
     private String error;
 
-    public UserOperation(Long userAccountId, BigDecimal amount, UserOperationType operationType, OffsetDateTime date) {
+    public UserOperation(Long userAccountId, BigDecimal amount, UserOperationType operationType) {
         this.userAccountId = userAccountId;
         this.amount = amount;
         this.operationType = operationType;
-        this.date = date;
     }
 }
