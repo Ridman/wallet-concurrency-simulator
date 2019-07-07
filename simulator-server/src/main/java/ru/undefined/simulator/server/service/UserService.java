@@ -12,7 +12,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public void checkUserExists(Long userId) {
-        if (userRepository.existsById(userId)) {
+        if (!userRepository.existsById(userId)) {
             throw new SimulatorException(Error.USER_NOT_FOUND);
         }
     }

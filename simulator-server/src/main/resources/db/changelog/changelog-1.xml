@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
     <changeSet author="mvinokurov" id="1.0">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="User"/>
             </not>
@@ -23,7 +23,7 @@
     </changeSet>
 
     <changeSet author="mvinokurov" id="1.1">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="UserAccount"/>
             </not>
@@ -48,7 +48,7 @@
     </changeSet>
 
     <changeSet author="mvinokurov" id="1.2">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="UserOperation"/>
             </not>
@@ -79,42 +79,42 @@
     </changeSet>
 
     <changeSet author="mvinokurov" id="1.3">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists tableName="UserOperation" columnName="error"/>
             </not>
         </preConditions>
-        <createTable tableName="UserOperation">
-            <column name="error" type="nvarchar(255)"/>
-        </createTable>
+        <addColumn tableName="UserOperation">
+            <column name="error" type="char(255)"/>
+        </addColumn>
         <rollback>
             <dropColumn tableName="UserOperation" columnName="error"/>
         </rollback>
     </changeSet>
 
     <changeSet author="mvinokurov" id="1.4">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists tableName="UserAccount" columnName="version"/>
             </not>
         </preConditions>
-        <createTable tableName="UserAccount">
+        <addColumn tableName="UserAccount">
             <column name="version" type="int" defaultValue="0"/>
-        </createTable>
+        </addColumn>
         <rollback>
             <dropColumn tableName="UserAccount" columnName="version"/>
         </rollback>
     </changeSet>
 
     <changeSet author="mvinokurov" id="1.5">
-        <preConditions>
+        <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists tableName="UserOperation" columnName="updatedBalance"/>
             </not>
         </preConditions>
-        <createTable tableName="UserOperation">
+        <addColumn tableName="UserOperation">
             <column name="updatedBalance" type="currency"/>
-        </createTable>
+        </addColumn>
         <rollback>
             <dropColumn tableName="UserOperation" columnName="updatedBalance"/>
         </rollback>

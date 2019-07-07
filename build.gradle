@@ -7,6 +7,13 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+ext {
+    springGrpcVersion = "3.3.0"
+    googleProtocVersion = "3.0.0"
+    springBootVersion = '2.1.6.RELEASE'
+    grpcVersion = "1.21.0"
+}
+
 repositories {
     mavenCentral()
 }

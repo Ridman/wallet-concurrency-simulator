@@ -33,4 +33,9 @@ public class UserOperation {
         this.amount = amount;
         this.operationType = operationType;
     }
+
+    // TODO might be improved with separate boolean flag
+    public boolean hasError() {
+        return error != null;
+    }
 }

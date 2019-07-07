@@ -2,14 +2,14 @@ version: '3'
 
 services:
 
-  simulator-server:
-    build:
-      context: simulator-server
-      dockerfile: Dockerfile
-    network_mode: host
-    restart: always
-    depends_on:
-      - mysql
+#  simulator-server:
+#    build:
+#      context: simulator-server
+#      dockerfile: Dockerfile
+#    network_mode: host
+#    restart: always
+#    depends_on:
+#      - mysql
 
   mysql:
     image: "mysql"

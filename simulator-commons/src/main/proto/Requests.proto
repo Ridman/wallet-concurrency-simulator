@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package ru.undefined.simulator.model.request;
+
+message BalanceRequest {
+    int64 userId = 1;
+}
+
+message TransactionBody {
+    int64 userId = 1;
+    double amount = 2;
+    string currency = 3;
+}
+
+message SimpleResponse {
+    string message = 1;
+    ResponseStatus status = 2;
+}
+
+message BalanceResponse {
+    string message = 1;
+    map<string, double> balances = 2;
+    ResponseStatus status = 3;
+}
+
+enum ResponseStatus {
+    OK = 0;
+    ERROR = 1;
+}

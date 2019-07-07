@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "WalletControllerBase";
+
+package ru.undefined.simulator.server.controller;
+
+import "Requests.proto";
+
+service WalletController {
+    rpc Withdraw (ru.undefined.simulator.model.request.TransactionBody)
+    returns (ru.undefined.simulator.model.request.SimpleResponse) {};
+
+    rpc Deposit (ru.undefined.simulator.model.request.TransactionBody)
+    returns (ru.undefined.simulator.model.request.SimpleResponse) {};
+
+    rpc getBalance (ru.undefined.simulator.model.request.BalanceRequest)
+    returns (ru.undefined.simulator.model.request.BalanceResponse) {};
+}
