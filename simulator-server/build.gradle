@@ -30,6 +30,6 @@ dependencies {
 }
 
 bootJar {
-    mainClassName = 'ru.undefined.simulator.server.Application'
+    mainClassName = 'ru.undefined.simulator.server.WalletServerApplication'
     classifier  = 'standalone'
 }

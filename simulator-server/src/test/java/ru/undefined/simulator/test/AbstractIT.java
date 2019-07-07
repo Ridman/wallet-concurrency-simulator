@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.undefined.simulator.commons.model.Currency;
 import ru.undefined.simulator.commons.model.User;
 import ru.undefined.simulator.commons.model.UserAccount;
-import ru.undefined.simulator.server.Application;
+import ru.undefined.simulator.server.WalletServerApplication;
 import ru.undefined.simulator.server.repository.UserAccountRepository;
 import ru.undefined.simulator.server.repository.UserRepository;
 
@@ -19,11 +19,11 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = WalletServerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @ContextConfiguration
 @TestPropertySource(locations = {"classpath:/application.properties", "classpath:/application-test.properties"})
-public class AbstractIT {
+public abstract class AbstractIT {
 
     protected List<User> existingUsers = new LinkedList<>();
 

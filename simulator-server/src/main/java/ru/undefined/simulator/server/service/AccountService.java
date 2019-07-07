@@ -62,11 +62,11 @@ public class AccountService {
                 userOperation.setDate(OffsetDateTime.now());
                 BigDecimal updatedBalance = operation.perform(userAccountRepository, accountId, amount);
                 userOperation.setUpdatedBalance(updatedBalance);
-            } catch (OptimisticLockException ex) {
-                throw ex;
-            } catch (Exception ex) {
-                log.error("Operation exception", ex);
+            } catch (SimulatorException ex) {
+                log.error("Operation exception {}", ex.getMessage());
                 userOperation.setError(ex.getMessage());
+            } catch (Exception ex) {
+                throw ex;
             }
         };
         executor.execute(action);

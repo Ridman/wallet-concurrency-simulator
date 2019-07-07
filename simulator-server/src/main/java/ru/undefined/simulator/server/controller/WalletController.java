@@ -63,10 +63,9 @@ public class WalletController extends WalletControllerGrpc.WalletControllerImplB
             }
         } catch (Exception ex) {
             responseBuilder.setMessage(ex.getMessage());
-        } finally {
-            boolean success = operation != null && !operation.hasError();
-            responseBuilder.setStatus(success ? ResponseStatus.OK : ResponseStatus.ERROR);
         }
+        boolean success = operation != null && !operation.hasError();
+        responseBuilder.setStatus(success ? ResponseStatus.OK : ResponseStatus.ERROR);
         return responseBuilder.build();
     }
 

@@ -1,6 +1,7 @@
 package ru.undefined.simulator.server.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.OptimisticLockException;
@@ -15,8 +16,11 @@ public class OptimisticRetryableExecutor {
             try {
                 runnable.run();
                 success = true;
-            } catch (OptimisticLockException ex) {
-                log.warn("Optimistic lock occurred, retrying", ex);
+            } catch (OptimisticLockException|ObjectOptimisticLockingFailureException ex) {
+                log.warn("Optimistic lock occurred, retrying");
+            } catch (Exception ex) {
+                log.error("Something went wrong", ex);
+                break;
             }
         }
     }

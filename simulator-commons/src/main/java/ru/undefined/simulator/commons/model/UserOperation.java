@@ -1,6 +1,9 @@
 package ru.undefined.simulator.commons.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,10 +13,13 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "UserOperation")
+@NoArgsConstructor
 public class UserOperation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private UUID id;
 
     private Long userAccountId;
@@ -22,6 +28,7 @@ public class UserOperation {
 
     private BigDecimal updatedBalance;
 
+    @Enumerated(EnumType.STRING)
     private UserOperationType operationType;
 
     private OffsetDateTime date;
